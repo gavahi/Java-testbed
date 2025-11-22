@@ -2,7 +2,9 @@ FROM eclipse-temurin:8-jre-alpine
 
 EXPOSE 8080
 
-COPY ./build/libs/my-app-1.0-SNAPSHOT.jar /usr/app/
+# Copy whatever JAR Gradle built and rename to app.jar
+COPY build/libs/*.jar /usr/app/app.jar
 WORKDIR /usr/app
 
-ENTRYPOINT ["java", "-jar", "my-app-1.0-SNAPSHOT.jar"]
+# Use the renamed JAR in ENTRYPOINT
+ENTRYPOINT ["java", "-jar", "app.jar"]
